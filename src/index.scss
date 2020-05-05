@@ -1,0 +1,44 @@
+@import "../node_modules/bulma/bulma.sass";
+
+html {
+  font-family: system-ui, sans-serif;
+  font-size: 1.25rem;
+}
+
+// body {
+//   margin: 0;
+//   padding: 0 1.5rem;
+// }
+
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.stats{
+  margin-top: .2rem;
+}
+
+.columns{
+  margin: 0em;
+}
+
+.text{
+  margin-top: .4rem;
+  margin-bottom: 1rem;
+}
+
+.hero-text{
+  padding-left: 5rem;
+  padding-top: 5rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .hero-text {
+    padding: 0;
+  }
+}
