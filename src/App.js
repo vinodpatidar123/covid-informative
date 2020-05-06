@@ -5,6 +5,7 @@ import ReactTooltip from "react-tooltip";
 import "./index.scss";
 
 import MapChart from "./components/mapChart";
+import LineChart from "./components/lineChart";
 
 function App() {
   const [content, setContent] = useState("");
@@ -31,7 +32,7 @@ function App() {
       <section>
       <div className="columns">
         <div className="column">
-        <img src="https://www.mygov.in/sites/all/themes/mygov/images/covid/symptoms.png" className="" alt="" />
+        <img src="https://www.mygov.in/sites/all/themes/mygov/images/covid/symptoms.png" className="image-symptoms" alt="" />
         </div>
         <div className="column">
         <h3 className="is-uppercase has-text-centered-mobile has-text-warning has-text-weight-bold text">How it spreads</h3>
@@ -49,6 +50,7 @@ function App() {
 <DashBoard />
 <MapChart setTooltipContent={setContent} />
 <ReactTooltip>{content}</ReactTooltip>
+<LineChart />
     </div>
   );
 }

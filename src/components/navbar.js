@@ -4,13 +4,37 @@ export default function Navbar(){
     const [menu, setMenu] = useState(false);
 
     return (
-    <nav className="navbar is-success">
+    <nav className="navbar is-transparent">
     <div className="navbar-brand">
-            <img src="https://image.freepik.com/free-vector/virus-corona-illustration_71983-696.jpg" style={{width:60}} className="img-fluid ${rounded-top,rounded-right,rounded-bottom,rounded-left, rounded-circle,|}" alt="" />
-            <a className="navbar-item" >
+            <span className="navbar-item" >
                 <h2 className="is-uppercase">Covid Informative</h2>
-            </a>
+            </span>
+            <a role="button" onClick={() => setMenu(!menu)} className={`navbar-burger burger ${menu ? "is-active" : ""}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
     </div>
+    <div className={`navbar-menu ${menu ? "is-active" : ""}`}>
+    <div className="navbar-end">
+      <div className="navbar-item">
+        <div className="field is-grouped">
+        <a className="navbar-item item is-uppercase" href="">
+        Home
+      </a>
+      <a className="navbar-item item is-uppercase" href="">
+        News
+      </a>
+      <a className="navbar-item item is-uppercase" href="">
+        Statewise Stats
+      </a>
+      <a className="navbar-item item is-uppercase" href="">
+        Statewise Stats
+      </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>
     )
 }

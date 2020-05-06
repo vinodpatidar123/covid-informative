@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { useFetch } from "../hooks";
 
-export default function DashBoard(){
+class DashBoard extends Component{
+    state = {
+        data: []
+      }
+      componentDidMount() {
+        fetch('https://api.rootnet.in/covid19-in/stats/latest')
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ data: data.data.summary })
+        })
+        .catch(console.log)
+      }
 
+render(){
     return (
 <section className="stats">
     <hr></hr>
@@ -10,8 +23,8 @@ export default function DashBoard(){
 <div className="column">
 <div className="card">
   <div className="card-content">
-    <p className="title has-text-centered has-text-warning">
-      349345
+<p className="title has-text-centered has-text-warning">
+      {this.state.data["total"]}
     </p>
     <p className="subtitle has-text-centered">
         Total Cases
@@ -23,7 +36,7 @@ export default function DashBoard(){
 <div className="card">
   <div className="card-content color">
     <p className="title has-text-centered has-text-success">
-      3491
+    {this.state.data["discharged"]}
     </p>
     <p className="subtitle has-text-centered">
       Total Recovered
@@ -35,7 +48,7 @@ export default function DashBoard(){
 <div className="card">
   <div className="card-content">
     <p className="title has-text-centered has-text-info">
-      349234
+     {this.state.data["total"] - this.state.data["discharged"] - this.state.data["deaths"]}
     </p>
     <p className="subtitle has-text-centered">
       Total Active
@@ -47,7 +60,7 @@ export default function DashBoard(){
 <div className="card">
   <div className="card-content">
     <p className="title has-text-centered has-text-danger">
-      349
+      {this.state.data["deaths"]}
     </p>
     <p className="subtitle has-text-centered ">
       Total Death
@@ -59,3 +72,6 @@ export default function DashBoard(){
 </section>
     )
 }
+}
+
+export default DashBoard;

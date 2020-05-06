@@ -29,16 +29,34 @@ svg {
 }
 
 .hero-text{
-  padding-left: 5rem;
+  padding-left: 2rem;
   padding-top: 5rem;
   margin-bottom: 2rem;
   text-transform: uppercase;
 }
 
+.image-symptoms{
+  padding-top: 2rem;
+}
+
+.item{
+  border-bottom: 1px transparent solid;
+}
+
+.item:hover{
+  border-bottom: 1px blue solid;
+  transition: cubic-bezier(0.6, -0.28, 0.735, 0.045) .1s ;
+}
 
 @media (min-width: 320px) and (max-width: 480px) {
 
   .hero-text {
     padding: 0;
+  }
+  .field.is-grouped{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
   }
 }
