@@ -4,7 +4,8 @@ import DashBoard from './components/dashboard';
 import ReactTooltip from "react-tooltip";
 import "./index.scss";
 
-import MapChart from "./components/mapChart";
+import IndiaMapChart from "./components/india_map";
+import StateMapChart from "./components/state_map";
 import LineChart from "./components/lineChart";
 
 function App() {
@@ -48,8 +49,11 @@ function App() {
   </div>
 </section>
 <DashBoard />
-<MapChart setTooltipContent={setContent} />
-<ReactTooltip>{content}</ReactTooltip>
+<div>
+<IndiaMapChart setTooltipContent={setContent} />
+<StateMapChart setTooltipContent={setContent} />
+<ReactTooltip>{content}</ReactTooltip> 
+</div>
 <LineChart />
     </div>
   );
