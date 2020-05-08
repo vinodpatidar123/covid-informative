@@ -7,7 +7,7 @@ import {
 } from "react-simple-maps";
 const INDIA_TOPOJSON = require("./IND_adm1.json");
 const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+  "https://rawgit.com/Anujarya300/bubble_maps/master/data/geography-data/india.topo.json";
 
 const rounded = num => {
   if (num > 1000000000) {
@@ -26,15 +26,15 @@ const MapChart = ({ setTooltipContent }) => {
         <h3 className="is-uppercase has-text-centered has-text-weight-bold">World Statistics</h3>
       <ComposableMap data-tip="" projection="geoMercator" projectionConfig={{ scale: 800, center: [78.9629, 22.5937] }}>
         {/* <ZoomableGroup> */}
-          <Geographies geography={INDIA_TOPOJSON}>
+          <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map(geo => (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
                   onMouseEnter={() => {
-                    const { NAME_1 } = geo.properties;
-                    setTooltipContent(`${NAME_1}`);
+                    const { name } = geo.properties;
+                    setTooltipContent(`${name}`);
                   }}
                   onMouseLeave={() => {
                     setTooltipContent("");
