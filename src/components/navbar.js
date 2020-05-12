@@ -19,14 +19,14 @@ export default function Navbar(){
     <div className="navbar-end">
       <div className="navbar-item">
         <div className="field is-grouped">
-        <a className="navbar-item item is-uppercase" href="">
+        <a className="navbar-item item is-uppercase" href="/">
         Home
       </a>
-      <a className="navbar-item item is-uppercase" href="">
+      <a className="navbar-item item is-uppercase" href="/news">
         News
       </a>
       <a className="navbar-item item is-uppercase" href="">
-        Statewise Stats
+        Zones
       </a>
       <a className="navbar-item item is-uppercase" href="">
         Statewise Stats

@@ -23,7 +23,7 @@ const MapChart = ({ setTooltipContent }) => {
   return (
     <>
         <hr></hr>
-        <h3 className="is-uppercase has-text-centered has-text-weight-bold">World Statistics</h3>
+        <h3 className="is-uppercase has-text-centered has-text-weight-bold">State Statistics</h3>
       <ComposableMap data-tip="" projection="geoMercator" projectionConfig={{ scale: 2500, center: [78.9629, 22.5937] }}>
         {/* <ZoomableGroup> */}
           <Geographies geography={INDIA_TOPOJSON}>
@@ -42,7 +42,9 @@ const MapChart = ({ setTooltipContent }) => {
                   style={{
                     default: {
                       fill: "#D6D6DA",
-                      outline: "none"
+                      outline: "none",
+                      stroke : "grey",
+                      strokeWidth : ".7"
                     },
                     hover: {
                       fill: "#F53",
