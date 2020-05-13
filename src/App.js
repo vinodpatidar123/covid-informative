@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import Navbar from './components/navbar';
-import DashBoard from './components/dashboard';
+import React, { useState } from "react";
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import Navbar from "./components/navbar";
+import DashBoard from "./components/dashboard";
 import ReactTooltip from "react-tooltip";
 import "./index.scss";
 
@@ -15,14 +16,24 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Hero />
-<DashBoard />
-<div>
-<IndiaMapChart setTooltipContent={setContent} />
-<StateMapChart setTooltipContent={setContent} />
-<ReactTooltip>{content}</ReactTooltip> 
-</div>
-<LineChart />
+      <Router>
+      <Switch >
+        <Route exact path="/" >
+        <Hero />
+        <DashBoard />
+        </Route>
+        <Route path="/zones">
+        <LineChart />
+        </Route>
+        <Route path="/news">
+        <div>
+        <IndiaMapChart setTooltipContent={setContent} />
+        <StateMapChart setTooltipContent={setContent} />
+        <ReactTooltip>{content}</ReactTooltip>
+        </div>
+        </Route>
+      </Switch>
+      </Router>
     </div>
   );
 }
