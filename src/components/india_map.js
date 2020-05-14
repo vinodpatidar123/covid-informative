@@ -21,11 +21,10 @@ const rounded = (num) => {
 	}
 };
 
-const MapChart = ({ setTooltipContent }) => {
+const MapChart = () => {
 	const [clickState, setClickState] = useState("Andhra Pradesh");
 	return (
 		<>
-			<hr></hr>
 			<h3 className="is-uppercase has-text-centered has-text-weight-bold">
 				India Statistics
 			</h3>
@@ -47,15 +46,15 @@ const MapChart = ({ setTooltipContent }) => {
 										key={geo.rsmKey}
 										geography={geo}
 										onMouseEnter={() => {
-											const { ST_NM } = geo.properties;
-											setTooltipContent(
-												<ul>
-													<li>{ST_NM}</li>
-												</ul>
-											);
+											// const { ST_NM } = geo.properties;
+											// setTooltipContent(
+											// 	<ul>
+											// 		<li>{ST_NM}</li>
+											// 	</ul>
+											// );
 										}}
 										onMouseLeave={() => {
-											setTooltipContent("");
+											// setTooltipContent("");
 										}}
 										onMouseDown={() => setClickState(geo.properties.ST_NM)}
 										style={{
@@ -78,11 +77,6 @@ const MapChart = ({ setTooltipContent }) => {
 								))
 							}
 						</Geographies>
-						{/* <Marker coordinates={[77, 22]} fill="#777">
-        <text textAnchor="middle" fill="#F53">
-          Canada
-        </text>
-      </Marker> */}
 						{/* </ZoomableGroup> */}
 					</ComposableMap>
 				</div>

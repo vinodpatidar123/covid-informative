@@ -3,7 +3,7 @@ const Assam = require("./state/Assam.json");
 const Mizoram = require("./state/mizoram_district.json");
 const AndamanAndNicobar = require("./state/andaman_districts.json");
 const AndhraPradesh = require("./state/andhrapradesh_district.json");
-const ArunachalPradesh = require("./state/arunachalpradesh_district.json");
+const ArunanchalPradesh = require("./state/arunachalpradesh_district.json");
 const Bihar = require("./state/bihar_district.json");
 const Chandigarh = require("./state/chandigarh_district.json");
 const Chhattisgarh = require("./state/chhattisgarh_district.json");
@@ -29,7 +29,7 @@ const Punjab = require("./state/punjab_district.json");
 const Rajasthan = require("./state/rajasthan_district.json");
 const Sikkim = require("./state/sikkim_district.json");
 const TamilNadu = require("./state/tamilnadu_district.json");
-const Telangana = require("./state/telangana_AC.json");
+const Telangana = require("./state/telangana.json");
 const Tripura = require("./state/tripura_district.json");
 const Uttarakhand = require("./state/uttarakhand_district.json");
 const UttarPradesh = require("./state/uttarpradesh.json");
@@ -43,7 +43,7 @@ module.exports = {
     Mizoram,
     AndamanAndNicobar,
     AndhraPradesh,
-    ArunachalPradesh,
+    ArunanchalPradesh,
     Bihar,
     Chandigarh,
     Chhattisgarh,

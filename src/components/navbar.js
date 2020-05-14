@@ -71,8 +71,8 @@ export default function Navbar() {
 		<LineChart />
         </Route>
         <Route path="/zones">
-		<IndiaMapChart setTooltipContent={setIndiaTooltip} />
-        <ReactTooltip type="light" >{indiaTooltip}</ReactTooltip>
+		<IndiaMapChart />
+        {/* <ReactTooltip type="light" >{indiaTooltip}</ReactTooltip> */}
         </Route>
 		<Route path="/state-wise">
 		<StateMapChart setTooltipContent={setStateTooltip} />
