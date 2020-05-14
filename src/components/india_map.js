@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { useState, memo } from "react";
 import {
 	ZoomableGroup,
 	ComposableMap,
@@ -7,6 +7,7 @@ import {
 	Marker,
 } from "react-simple-maps";
 const INDIA_TOPOJSON = require("./india_topojson/India-States.json");
+const states = require("./india_topojson/state");
 const geoUrl =
 	"https://rawgit.com/Anujarya300/bubble_maps/master/data/geography-data/india.topo.json";
 
@@ -21,6 +22,7 @@ const rounded = (num) => {
 };
 
 const MapChart = ({ setTooltipContent }) => {
+	const [clickState, setClickState] = useState("Andhra Pradesh");
 	return (
 		<>
 			<hr></hr>
@@ -47,12 +49,15 @@ const MapChart = ({ setTooltipContent }) => {
 										onMouseEnter={() => {
 											const { ST_NM } = geo.properties;
 											setTooltipContent(
-												`${ST_NM} Death :- 3454`
+												<ul>
+													<li>{ST_NM}</li>
+												</ul>
 											);
 										}}
 										onMouseLeave={() => {
 											setTooltipContent("");
 										}}
+										onMouseDown={() => setClickState(geo.properties.ST_NM)}
 										style={{
 											default: {
 												fill: "#D6D6DA",
@@ -82,41 +87,43 @@ const MapChart = ({ setTooltipContent }) => {
 					</ComposableMap>
 				</div>
 				<div className="column">
-					<div className="card">
-						<div className="card-image">
-							<figure className="image is-4by3">
-								<img
-									src="http://bulma.io/images/placeholders/1280x960.png"
-									alt="Image"
-								/>
-							</figure>
-						</div>
-						<div className="card-content">
-							<div className="media">
-								<div className="media-left">
-									<figure className="image is-48x48">
-										<img
-											src="http://bulma.io/images/placeholders/96x96.png"
-											alt="Image"
-										/>
-									</figure>
-								</div>
-								<div className="media-content">
-									<p className="title is-4">John Smith</p>
-									<p className="subtitle is-6">@johnsmith</p>
-								</div>
-							</div>
-
-							<div className="content">
-								Lorem ipsum dolor sit amet, consectetur
-								adipiscing elit. Phasellus nec iaculis mauris.{" "}
-								<a>@bulmaio</a>.<a>#css</a> <a>#responsive</a>
-								<br />
-								<small>11:09 PM - 1 Jan 2016</small>
-							</div>
-						</div>
+					<div className="field has-addons">
+					  <p className="control">
+						<span className="select">
+						  <select onChange={e=>setClickState(e.currentTarget.value)}>
+							{ 
+								states.map(state=>(
+									<option value={state["st_nm"]}>{state["st_nm"]}</option>
+								))
+							}
+						  </select>
+						</span>
+					  </p>
 					</div>
-				</div>
+				<div className="card">
+  <header className="card-header">
+    <p className="card-header-title">
+      {clickState}
+    </p>
+    <a href="#" className="card-header-icon" aria-label="more options">
+      <span className="icon">
+        <i className="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </a>
+  </header>
+  <div className="card-content">
+    <div className="content">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+      <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+      <br></br>
+    </div>
+  </div>
+  <footer className="card-footer">
+    <a href="#" className="card-footer-item">Save</a>
+    <a href="#" className="card-footer-item">Edit</a>
+    <a href="#" className="card-footer-item">Delete</a>
+  </footer>
+</div></div>
 			</div>
 		</>
 	);
