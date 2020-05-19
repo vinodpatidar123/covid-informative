@@ -1,4 +1,4 @@
-import React, { useState, memo,useEffect } from "react";
+import React, { Component }  from "react";
 import {
 	ComposableMap,
 	Geographies,
@@ -6,38 +6,34 @@ import {
 } from "react-simple-maps";
 const INDIA_TOPOJSON = require("./india_topojson/India-States.json");
 const states = require("./india_topojson/state");
-var s;
-function MapChart() {
-	const [clickState, setClickState] = useState("Andhra Pradesh");
-	const [stateData,setStateData] = useState([]);
-	useEffect(() => {
-		fetch(
-		  `https://api.rootnet.in/covid19-in/stats/latest`,
-		  {
-			method: "GET",
-			headers: new Headers({
-			  Accept: "application/json"
-			})
-		  }
-		)
-		  .then(res => res.json())
-		  .then(response => {
-			setStateData(response.data.regional);
-			console.log(response.data);
-		  })
-		  .catch(error => console.log(error));
-	  },[]);
-	// s = stateData.find(e => e.loc === clickState);
-	// // console.log(s)
+var s = {};
+var st = [];
 
-	// const l = Object.entries(stateData);
-	// console.log(l[0][1])
+class MapChart extends Component{
 
-	// Object.keys(stateData).map(k => stateData[k]).forEach(element => {
-	// 		Object.values(element).forEach(e=>(
-	// 			console.log(e)
-	// 		))
-	// });
+	state = {
+		clickState : "Andhra Pradesh",
+		stateData : [],
+		state : {}
+	}
+
+	componentDidMount() {
+        fetch('https://api.covid19india.org/data.json')
+        .then(res => res.json())
+        .then((data) => {
+		  this.setState({stateData : data.statewise })
+		//   console.log(this.state.stateData);
+        })
+		.catch(console.log);
+		
+	  }
+
+	  componentDidUpdate(){
+		  s = this.state.stateData.find(e => e.state === this.state.clickState);
+		  console.log(s);
+	  }
+
+render(){
 	return (
 		<>
 			<h3 className="is-uppercase has-text-centered has-text-weight-bold">
@@ -89,7 +85,7 @@ function MapChart() {
 					<div className="field has-addons">
 					  <p className="control">
 						<span className="select">
-						  <select onChange={e=>setClickState(e.currentTarget.value)}>
+						  <select onChange={e=> this.setState({clickState :e.currentTarget.value})}>
 							{ 
 								states.map(state=>(
 									<option value={state["st_nm"]}>{state["st_nm"]}</option>
@@ -99,27 +95,37 @@ function MapChart() {
 						</span>
 					  </p>
 					</div>
-	<div className="card">
-  	<header className="card-header">
-    <p className="card-header-title">
-      {clickState}
-    </p>
-    <a href="#" className="card-header-icon" aria-label="more options">
-      <span className="icon">
-        <i className="fas fa-angle-down" aria-hidden="true"></i>
-      </span>
-    </a>
-  	</header>
-  	<footer className="card-footer">
-    <a href="#" className="card-footer-item">Save</a>
-    <a href="#" className="card-footer-item">Edit</a>
-    <a href="#" className="card-footer-item">Delete</a>
-  	</footer>
+	<div style={{paddingRight:"30px"}}>
+	<div className="columns">
+	  <div className="column is-half is-paddingless" style={{backgroundColor : "#5c6b73", color : "white",borderRadius : "5px",margin:"10px"}}>
+	  <div className="column is-marginless">
+			<h5>Confirmed Cases   -   {s["confirmed"]}</h5>
+		</div>
+	  </div>
+	  <div className="column is-half is-paddingless" style={{backgroundColor : "#4ecdc4", color : "white",borderRadius : "5px",margin:"10px"}}>
+	  <div className="column is-marginless">
+			<h5>Active Cases   -   {s["active"]}</h5>
+		</div>
+	  </div>
+	</div>
+	<div className="columns">
+	  <div className="column is-half is-paddingless" style={{backgroundColor : "#ef233c", color : "white",borderRadius : "5px",margin:"10px"}}>
+	  <div className="column is-marginless">
+			<h5>Death Cases   -   {s["deaths"]}</h5>
+		</div>
+	  </div>
+	  <div className="column is-half is-paddingless" style={{backgroundColor : "#52b788", color : "white",borderRadius : "5px",margin:"10px"}}>
+	  <div className="column is-marginless">
+			<h5>Recovered Cases   -   {s["recovered"]}</h5>
+		</div>
+	  </div>
+	</div>
 	</div>
 	</div>
 	</div>
 	</>
-	);
+	)
+	};
 };
 
-export default memo(MapChart);
+export default MapChart;
