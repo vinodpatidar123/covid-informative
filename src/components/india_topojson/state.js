@@ -21,8 +21,8 @@ const states = [
             }
     },
     {
-        "st_nm":"Arunanchal Pradesh",
-        "st":"ArunanchalPradesh",
+        "st_nm":"Arunachal Pradesh",
+        "st":"ArunachalPradesh",
         "lat":"27.10039878",
         "long":"93.61660071",
         "zones" : {
@@ -272,7 +272,7 @@ const states = [
         }
     },
     {
-        "st_nm":"Jammu & Kashmir",
+        "st_nm":"Jammu and Kashmir",
         "st":"JammuAndKashmir",
         "lat":"34.29995933",
         "long":"74.46665849",
@@ -926,7 +926,7 @@ const states = [
         }
     },
     {
-        "st_nm":"Andaman & Nicobar Island",
+        "st_nm":"Andaman and Nicobar Islands",
         "st":"AndamanAndNicobar",
         "lat":"11.66702557",
         "long":"92.73598262",

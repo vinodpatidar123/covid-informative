@@ -9,7 +9,7 @@ class DashBoard extends Component{
         fetch('https://api.rootnet.in/covid19-in/stats/latest')
         .then(res => res.json())
         .then((data) => {
-          this.setState({ data: data.data.summary })
+          this.setState({ data: data.data.summary,state : data.data.regional })
         })
         .catch(console.log)
       }

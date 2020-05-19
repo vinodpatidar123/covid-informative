@@ -1,28 +1,43 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo,useEffect } from "react";
 import {
-	ZoomableGroup,
 	ComposableMap,
 	Geographies,
-	Geography,
-	Marker,
+	Geography
 } from "react-simple-maps";
 const INDIA_TOPOJSON = require("./india_topojson/India-States.json");
 const states = require("./india_topojson/state");
-const geoUrl =
-	"https://rawgit.com/Anujarya300/bubble_maps/master/data/geography-data/india.topo.json";
-
-const rounded = (num) => {
-	if (num > 1000000000) {
-		return Math.round(num / 100000000) / 10 + "Bn";
-	} else if (num > 1000000) {
-		return Math.round(num / 100000) / 10 + "M";
-	} else {
-		return Math.round(num / 100) / 10 + "K";
-	}
-};
-
-const MapChart = () => {
+var s;
+function MapChart() {
 	const [clickState, setClickState] = useState("Andhra Pradesh");
+	const [stateData,setStateData] = useState([]);
+	useEffect(() => {
+		fetch(
+		  `https://api.rootnet.in/covid19-in/stats/latest`,
+		  {
+			method: "GET",
+			headers: new Headers({
+			  Accept: "application/json"
+			})
+		  }
+		)
+		  .then(res => res.json())
+		  .then(response => {
+			setStateData(response.data.regional);
+			console.log(response.data);
+		  })
+		  .catch(error => console.log(error));
+	  },[]);
+	// s = stateData.find(e => e.loc === clickState);
+	// // console.log(s)
+
+	// const l = Object.entries(stateData);
+	// console.log(l[0][1])
+
+	// Object.keys(stateData).map(k => stateData[k]).forEach(element => {
+	// 		Object.values(element).forEach(e=>(
+	// 			console.log(e)
+	// 		))
+	// });
 	return (
 		<>
 			<h3 className="is-uppercase has-text-centered has-text-weight-bold">
@@ -38,25 +53,12 @@ const MapChart = () => {
 							center: [89.9629, 22.5937],
 						}}
 					>
-						{/* <ZoomableGroup> */}
 						<Geographies geography={INDIA_TOPOJSON}>
 							{({ geographies }) =>
 								geographies.map((geo) => (
 									<Geography
 										key={geo.rsmKey}
 										geography={geo}
-										onMouseEnter={() => {
-											// const { ST_NM } = geo.properties;
-											// setTooltipContent(
-											// 	<ul>
-											// 		<li>{ST_NM}</li>
-											// 	</ul>
-											// );
-										}}
-										onMouseLeave={() => {
-											// setTooltipContent("");
-										}}
-										onMouseDown={() => setClickState(geo.properties.ST_NM)}
 										style={{
 											default: {
 												fill: "#D6D6DA",
@@ -65,19 +67,22 @@ const MapChart = () => {
 												strokeWidth: ".7",
 											},
 											hover: {
-												fill: "#F53",
+												fill: "#D6D6DA",
 												outline: "none",
+												stroke: "grey",
+												strokeWidth: ".7",
 											},
 											pressed: {
-												fill: "#E42",
+												fill: "#D6D6DA",
 												outline: "none",
+												stroke: "grey",
+												strokeWidth: ".7",
 											},
 										}}
 									/>
 								))
 							}
 						</Geographies>
-						{/* </ZoomableGroup> */}
 					</ComposableMap>
 				</div>
 				<div className="column">
@@ -94,8 +99,8 @@ const MapChart = () => {
 						</span>
 					  </p>
 					</div>
-				<div className="card">
-  <header className="card-header">
+	<div className="card">
+  	<header className="card-header">
     <p className="card-header-title">
       {clickState}
     </p>
@@ -104,22 +109,16 @@ const MapChart = () => {
         <i className="fas fa-angle-down" aria-hidden="true"></i>
       </span>
     </a>
-  </header>
-  <div className="card-content">
-    <div className="content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-      <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-      <br></br>
-    </div>
-  </div>
-  <footer className="card-footer">
+  	</header>
+  	<footer className="card-footer">
     <a href="#" className="card-footer-item">Save</a>
     <a href="#" className="card-footer-item">Edit</a>
     <a href="#" className="card-footer-item">Delete</a>
-  </footer>
-</div></div>
-			</div>
-		</>
+  	</footer>
+	</div>
+	</div>
+	</div>
+	</>
 	);
 };
 

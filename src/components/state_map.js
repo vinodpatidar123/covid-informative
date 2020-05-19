@@ -17,18 +17,13 @@ const MapChart = ({ setTooltipContent }) => {
   const INDIA_TOPOJSON = states_topojson[clickState];
   let color;
   const fillColor = (state,district) => {
-    color = states.find(e => e.st_nm == state).zones[district];
+    color = states.find(e => e.st_nm === state).zones[district];
     console.log(color);
     if(color === "Red Zone") color = "#ff1919";
     else if(color === "Orange Zone") color = "#ffae19";
     else color = "#198c19"
     return color
   }
-  var config = {
-    scale : 2500,
-    center : [INDIA_TOPOJSON.transform.translate[0]+6,INDIA_TOPOJSON.transform.translate[1]+4]
-  }
-
   return (
     <>
         <div className="columns" style={wrapperStyles}>
@@ -55,7 +50,8 @@ const MapChart = ({ setTooltipContent }) => {
           style={{
             width: "100%",
             animationDelay: "2.5s"
-          }} data-tip="" projection="geoMercator" projectionConfig={config}>
+          }} data-tip="" projection="geoMercator" projectionConfig={{scale : 2500,
+            center : [INDIA_TOPOJSON.transform.translate[0]+6,INDIA_TOPOJSON.transform.translate[1]+4]}}>
           <Geographies geography={INDIA_TOPOJSON}>
             {({geographies}) =>
               geographies.map((geo) => (
